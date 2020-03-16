@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Title of the document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 >Contact Form</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <form action="{% url 'contact_form' %}" method="post">
+            {% csrf_token %}
+                <div class="form-check">
+                    {{ form.cc_myself }}
+                    <label class="form-check-label" for="{{ form.cc_myself.id_for_label }}">{{ form.cc_myself.label }}</label>
+                    {{ form.cc_myself.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
+                    {{ form.subject }}
+                    {{ form.subject.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+                    {{ form.message }}
+                    {{ form.message.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.sender.id_for_label }}">{{ form.sender.label }}</label>
+                    {{ form.sender }}
+                    {{ form.sender.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.contact_type.id_for_label }}">{{ form.contact_type.label }}</label>
+                    {{ form.contact_type }}
+                    {{ form.contact_type.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.contact_date.id_for_label }}">{{ form.contact_date.label }}</label>
+                    <input 
+                        type="date" 
+                        class="form-control" 
+                        name="{{ form.contact_date.name }}" 
+                        id="{{ form.contact_date.id_for_label }}" 
+                        value="form.contact_date.value"
+                    >
+                    <small class="form-text text-muted">{{ form.contact_date.help_text }}</small>
+                    {{ form.contact_date.errors }}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-4 text-danger">
+                {{msg}}<br>
+                {{form.cleaned_data}}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
